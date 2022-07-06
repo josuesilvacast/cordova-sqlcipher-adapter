@@ -120,7 +120,7 @@ class SQLiteConnectorDatabase extends SQLiteAndroidDatabase
                 ex.printStackTrace();
                 sqliteErrorCode = ex.getErrorCode();
                 errorMessage = ex.getMessage();
-                Log.v("executeSqlBatch", "SQLitePlugin.executeSql[Batch](): SQL Error code = " + sqliteErrorCode + " message = " + errorMessage);
+                Log.e("executeSqlBatch", "SQLitePlugin.executeSql[Batch](): SQL Error code = " + sqliteErrorCode + " message = " + errorMessage);
 
                 switch(sqliteErrorCode) {
                 case SQLCode.ERROR:
@@ -209,7 +209,7 @@ class SQLiteConnectorDatabase extends SQLiteAndroidDatabase
         } catch (SQLException ex) {
             ex.printStackTrace();
             String errorMessage = ex.getMessage();
-            Log.v("executeSqlBatch", "SQLitePlugin.executeSql[Batch](): Error=" + errorMessage);
+            Log.e("executeSqlBatch", "SQLitePlugin.executeSql[Batch](): Error=" + errorMessage);
 
             // cleanup statement and throw the exception:
             myStatement.dispose();
@@ -217,7 +217,7 @@ class SQLiteConnectorDatabase extends SQLiteAndroidDatabase
         } catch (JSONException ex) {
             ex.printStackTrace();
             String errorMessage = ex.getMessage();
-            Log.v("executeSqlBatch", "SQLitePlugin.executeSql[Batch](): Error=" + errorMessage);
+            Log.e("executeSqlBatch", "SQLitePlugin.executeSql[Batch](): Error=" + errorMessage);
 
             // cleanup statement and throw the exception:
             myStatement.dispose();
@@ -278,3 +278,4 @@ class SQLiteConnectorDatabase extends SQLiteAndroidDatabase
     }
 
 } /* vim: set expandtab : */
+

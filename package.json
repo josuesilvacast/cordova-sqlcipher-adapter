@@ -1,7 +1,34 @@
 {
-  "name": "cordova-sqlcipher-adapter",
-  "version": "0.5.4",
-  "description": "SQLCipher database adapter for PhoneGap/Cordova, based on cordova-sqlite-storage",
+  "_from": "cordova-sqlcipher-adapter@0.5.4",
+  "_id": "cordova-sqlcipher-adapter@0.5.4",
+  "_inBundle": false,
+  "_integrity": "sha512-Ig7Rp02UaaF9YIH/zpd/Q/3huYlot5rEQdQ8or1XAxI668EhBA2l3+ZKFFJH4RXaFA2zDQ4gRg4lH0g2dCHI8w==",
+  "_location": "/cordova-sqlcipher-adapter",
+  "_phantomChildren": {},
+  "_requested": {
+    "type": "version",
+    "registry": true,
+    "raw": "cordova-sqlcipher-adapter@0.5.4",
+    "name": "cordova-sqlcipher-adapter",
+    "escapedName": "cordova-sqlcipher-adapter",
+    "rawSpec": "0.5.4",
+    "saveSpec": null,
+    "fetchSpec": "0.5.4"
+  },
+  "_requiredBy": [
+    "/"
+  ],
+  "_resolved": "https://registry.npmjs.org/cordova-sqlcipher-adapter/-/cordova-sqlcipher-adapter-0.5.4.tgz",
+  "_shasum": "5df8c3b8660f041a063ec502e7d1630fad160189",
+  "_spec": "cordova-sqlcipher-adapter@0.5.4",
+  "_where": "/home/basa03/Workspace/GITLAB/myphone-app/Ionic",
+  "author": {
+    "name": "various"
+  },
+  "bugs": {
+    "url": "https://github.com/brodybits/cordova-sqlcipher-adapter/issues"
+  },
+  "bundleDependencies": false,
   "cordova": {
     "id": "cordova-sqlcipher-adapter",
     "platforms": [
@@ -11,10 +38,14 @@
       "windows"
     ]
   },
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/brodybits/cordova-sqlcipher-adapter.git"
+  "deprecated": false,
+  "description": "SQLCipher database adapter for PhoneGap/Cordova, based on cordova-sqlite-storage",
+  "devDependencies": {
+    "coffeescript": "1",
+    "cross-spawn": "^6.0.5",
+    "fs-extra": "^8.1.0"
   },
+  "homepage": "https://github.com/brodybits/cordova-sqlcipher-adapter",
   "keywords": [
     "sqlite",
     "sqlcipher",
@@ -24,20 +55,17 @@
     "cordova-osx",
     "cordova-windows"
   ],
-  "author": "various",
   "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/brodybits/cordova-sqlcipher-adapter/issues"
+  "name": "cordova-sqlcipher-adapter",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/brodybits/cordova-sqlcipher-adapter.git"
   },
-  "homepage": "https://github.com/brodybits/cordova-sqlcipher-adapter",
   "scripts": {
     "clean-spec": "rm -rf spec/[mnp]* && git cl spec/config.xml spec/package.json && git status --ignored",
     "prepare-js": "coffee -p SQLitePlugin.coffee.md > www/SQLitePlugin.js",
     "prepare-spec": "node scripts/prepareSpec.js"
   },
-  "devDependencies": {
-    "coffeescript": "1",
-    "cross-spawn": "^6.0.5",
-    "fs-extra": "^8.1.0"
-  }
+  "version": "0.5.4"
 }
+

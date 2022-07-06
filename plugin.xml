@@ -34,12 +34,17 @@
 
         <source-file src="src/android/io/sqlc/SQLitePlugin.java" target-dir="src/io/sqlc"/>
         <source-file src="src/android/io/sqlc/SQLiteAndroidDatabase.java" target-dir="src/io/sqlc"/>
+        <source-file src="src/android/io/sqlc/SQLiteConnectorDatabase.java" target-dir="src/io/sqlc"/>
+
+        <!-- Android-sqlite-connector [jar]: -->
+        <lib-file src="src/android/libs/libs/sqlite-connector.jar" />
+        <!-- Android-sqlite-connector native driver [native libs in jar]: -->
+        <lib-file src="src/android/libs/sqlite-native-driver.jar" />
+
         <!-- [FUTURE TBD] ref: litehelpers/Cordova-sqlcipher-adapter#40
                                litehelpers/Cordova-sqlcipher-adapter#25
                                sqlcipher/sqlcipher#125
-        <source-file src="src/android/io/sqlc/SQLiteConnectorDatabase.java" target-dir="src/io/sqlc"/>
 
-        <source-file src="node_modules/cordova-sqlite-storage-dependencies/libs/sqlite-connector.jar" target-dir="libs"/>
          ...
          -->
         <lib-file src="src/android/libs/android-database-sqlcipher-classes.jar" />
@@ -144,3 +149,4 @@
 </plugin>
 
 <!-- vim: set expandtab : -->
+

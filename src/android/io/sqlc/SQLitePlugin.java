@@ -6,6 +6,7 @@
 
 package io.sqlc;
 
+import android.os.Build;
 import android.util.Log;
 
 import java.io.File;
@@ -222,8 +223,6 @@ public class SQLitePlugin extends CordovaPlugin {
                 dbfile.getParentFile().mkdirs();
             }
 
-            Log.v("info", "Open sqlite db: " + dbfile.getAbsolutePath());
-
             SQLiteAndroidDatabase mydb = new SQLiteAndroidDatabase();
             mydb.open(dbfile, key);
 
@@ -348,7 +347,7 @@ public class SQLitePlugin extends CordovaPlugin {
 
         public void run() {
             try {
-                this.mydb = openDatabase(dbname, this.dbkey, this.openCbc, false);
+                this.mydb = openDatabase(dbname, this.dbkey, this.openCbc, Build.VERSION.SDK_INT > Build.VERSION_CODES.Q);
             } catch (Exception e) {
                 Log.e(SQLitePlugin.class.getSimpleName(), "unexpected error, stopping db thread", e);
                 dbrmap.remove(dbname);
@@ -449,3 +448,4 @@ public class SQLitePlugin extends CordovaPlugin {
 }
 
 /* vim: set expandtab : */
+

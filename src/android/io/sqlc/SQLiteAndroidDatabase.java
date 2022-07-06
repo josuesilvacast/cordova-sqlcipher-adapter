@@ -95,7 +95,7 @@ class SQLiteAndroidDatabase
                 try {
                     mydb.endTransaction();
                 } catch (Exception ex) {
-                    Log.v("closeDatabaseNow", "INTERNAL PLUGIN ERROR IGNORED: Not able to end active transaction before closing database: " + ex.getMessage());
+                    Log.e("closeDatabaseNow", "INTERNAL PLUGIN ERROR IGNORED: Not able to end active transaction before closing database: " + ex.getMessage());
                     ex.printStackTrace();
                 }
                 isTransactionActive = false;
@@ -151,10 +151,8 @@ class SQLiteAndroidDatabase
 
             try {
                 boolean needRawQuery = true;
-
-                //Log.v("executeSqlBatch", "...");
+                
                 QueryType queryType = getQueryType(query);
-                //Log.v("executeSqlBatch", "query type: " + queryType);
 
                 if (queryType == QueryType.update || queryType == queryType.delete) {
                     // NOTE: SQLCipher for Android provides consistent SQLiteStatement.executeUpdateDelete();
@@ -174,14 +172,14 @@ class SQLiteAndroidDatabase
                         ex.printStackTrace();
                         errorMessage = "constraint failure: " + ex.getMessage();
                         code = 6; // SQLException.CONSTRAINT_ERR
-                        Log.v("executeSqlBatch", "SQLiteStatement.executeUpdateDelete(): Error=" + errorMessage);
+                        Log.e("executeSqlBatch", "SQLiteStatement.executeUpdateDelete(): Error=" + errorMessage);
                         // stop the query in case of error:
                         needRawQuery = false;
                     } catch (SQLiteException ex) {
                         // Indicate problem & stop this query:
                         ex.printStackTrace();
                         errorMessage = ex.getMessage();
-                        Log.v("executeSqlBatch", "SQLiteStatement.executeUpdateDelete(): Error=" + errorMessage);
+                        Log.e("executeSqlBatch", "SQLiteStatement.executeUpdateDelete(): Error=" + errorMessage);
                         // stop the query in case of error:
                         needRawQuery = false;
                     }
@@ -221,12 +219,12 @@ class SQLiteAndroidDatabase
                         ex.printStackTrace();
                         errorMessage = "constraint failure: " + ex.getMessage();
                         code = 6; // SQLException.CONSTRAINT_ERR
-                        Log.v("executeSqlBatch", "SQLiteDatabase.executeInsert(): Error=" + errorMessage);
+                        Log.e("executeSqlBatch", "SQLiteDatabase.executeInsert(): Error=" + errorMessage);
                     } catch (SQLiteException ex) {
                         // report some other error result with the error message
                         ex.printStackTrace();
                         errorMessage = ex.getMessage();
-                        Log.v("executeSqlBatch", "SQLiteDatabase.executeInsert(): Error=" + errorMessage);
+                        Log.e("executeSqlBatch", "SQLiteDatabase.executeInsert(): Error=" + errorMessage);
                     }
 
                     // "finally" cleanup myStatement
@@ -244,7 +242,7 @@ class SQLiteAndroidDatabase
                     } catch (SQLiteException ex) {
                         ex.printStackTrace();
                         errorMessage = ex.getMessage();
-                        Log.v("executeSqlBatch", "SQLiteDatabase.beginTransaction(): Error=" + errorMessage);
+                        Log.e("executeSqlBatch", "SQLiteDatabase.beginTransaction(): Error=" + errorMessage);
                     }
                 }
 
@@ -260,7 +258,7 @@ class SQLiteAndroidDatabase
                     } catch (SQLiteException ex) {
                         ex.printStackTrace();
                         errorMessage = ex.getMessage();
-                        Log.v("executeSqlBatch", "SQLiteDatabase.setTransactionSuccessful/endTransaction(): Error=" + errorMessage);
+                        Log.e("executeSqlBatch", "SQLiteDatabase.setTransactionSuccessful/endTransaction(): Error=" + errorMessage);
                     }
                 }
 
@@ -275,7 +273,7 @@ class SQLiteAndroidDatabase
                     } catch (SQLiteException ex) {
                         ex.printStackTrace();
                         errorMessage = ex.getMessage();
-                        Log.v("executeSqlBatch", "SQLiteDatabase.endTransaction(): Error=" + errorMessage);
+                        Log.e("executeSqlBatch", "SQLiteDatabase.endTransaction(): Error=" + errorMessage);
                     }
                 }
 
@@ -289,12 +287,12 @@ class SQLiteAndroidDatabase
                         ex.printStackTrace();
                         errorMessage = "constraint failure: " + ex.getMessage();
                         code = 6; // SQLException.CONSTRAINT_ERR
-                        Log.v("executeSqlBatch", "Raw query error=" + errorMessage);
+                        Log.e("executeSqlBatch", "Raw query error=" + errorMessage);
                     } catch (SQLiteException ex) {
                         // report some other error result with the error message
                         ex.printStackTrace();
                         errorMessage = ex.getMessage();
-                        Log.v("executeSqlBatch", "Raw query error=" + errorMessage);
+                        Log.e("executeSqlBatch", "Raw query error=" + errorMessage);
                     }
 
                     if (needRowsAffectedCompat) {
@@ -304,7 +302,7 @@ class SQLiteAndroidDatabase
             } catch (Exception ex) {
                 ex.printStackTrace();
                 errorMessage = ex.getMessage();
-                Log.v("executeSqlBatch", "SQLiteAndroidDatabase.executeSql[Batch](): Error=" + errorMessage);
+                Log.e("executeSqlBatch", "SQLiteAndroidDatabase.executeSql[Batch](): Error=" + errorMessage);
             }
 
             try {
@@ -328,7 +326,7 @@ class SQLiteAndroidDatabase
                 }
             } catch (JSONException ex) {
                 ex.printStackTrace();
-                Log.v("executeSqlBatch", "SQLiteAndroidDatabase.executeSql[Batch](): Error=" + ex.getMessage());
+                Log.e("executeSqlBatch", "SQLiteAndroidDatabase.executeSql[Batch](): Error=" + ex.getMessage());
                 // TODO what to do?
             }
         }
@@ -375,7 +373,7 @@ class SQLiteAndroidDatabase
         } catch (Exception ex) {
             ex.printStackTrace();
             String errorMessage = ex.getMessage();
-            Log.v("executeSqlBatch", "SQLiteAndroidDatabase.executeSql[Batch](): Error=" + errorMessage);
+            Log.e("executeSqlBatch", "SQLiteAndroidDatabase.executeSql[Batch](): Error=" + errorMessage);
             throw ex;
         }
 
