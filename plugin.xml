@@ -2,7 +2,7 @@
 <plugin xmlns="http://www.phonegap.com/ns/plugins/1.0"
     xmlns:android="http://schemas.android.com/apk/res/android"
     id="cordova-sqlcipher-adapter"
-    version="0.5.4">
+    version="0.5.5">
 
     <name>Cordova sqlcipher adapter</name>
 
@@ -37,7 +37,7 @@
         <source-file src="src/android/io/sqlc/SQLiteConnectorDatabase.java" target-dir="src/io/sqlc"/>
 
         <!-- Android-sqlite-connector [jar]: -->
-        <lib-file src="src/android/libs/libs/sqlite-connector.jar" />
+        <lib-file src="src/android/libs/sqlite-connector.jar" />
         <!-- Android-sqlite-connector native driver [native libs in jar]: -->
         <lib-file src="src/android/libs/sqlite-native-driver.jar" />
 
@@ -149,4 +149,3 @@
 </plugin>
 
 <!-- vim: set expandtab : -->
-
