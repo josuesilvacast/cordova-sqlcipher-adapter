@@ -46,7 +46,6 @@ class SQLiteConnectorDatabase extends SQLiteAndroidDatabase
      *
      * @param dbFile   The database File specification
      */
-    @Override
     void open(File dbFile) throws Exception {
         mydb = connector.newSQLiteConnection(dbFile.getAbsolutePath(),
           SQLiteOpenFlags.READWRITE | SQLiteOpenFlags.CREATE);
@@ -68,7 +67,6 @@ class SQLiteConnectorDatabase extends SQLiteAndroidDatabase
     /**
      * Ignore Android bug workaround for NDK version
      */
-    @Override
     void bugWorkaround() { }
 
     /**
