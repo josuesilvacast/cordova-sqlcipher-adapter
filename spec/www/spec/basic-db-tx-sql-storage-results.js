@@ -171,7 +171,6 @@ var mytests = function() {
                 expect(JSON.stringify(e)).toBe('---');
                 done();
               }, function() {
-                console.log('second tx ok success cb');
                 expect(check_count).toBe(7);
 
                 // Close (plugin only) & finish:
@@ -371,7 +370,6 @@ var mytests = function() {
                 expect(JSON.stringify(e)).toBe('---');
                 done();
               }, function() {
-                console.log('second tx ok success cb');
                 expect(check_count).toBe(10);
 
                 expect(store_rows.item(0).data).toBe('test');
@@ -479,7 +477,6 @@ var mytests = function() {
                 expect(JSON.stringify(e)).toBe('---');
                 done();
               }, function() {
-                console.log('second tx ok success cb');
                 expect(check_count).toBe(7);
 
                 // Close (plugin only) & finish:
@@ -579,7 +576,6 @@ var mytests = function() {
                 expect(JSON.stringify(e)).toBe('---');
                 done();
               }, function() {
-                console.log('second tx ok success cb');
                 expect(check_count).toBe(7);
 
                 // Close (plugin only) & finish:

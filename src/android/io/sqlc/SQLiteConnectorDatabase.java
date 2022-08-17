@@ -6,8 +6,6 @@
 
 package io.sqlc;
 
-import android.util.Log;
-
 import java.io.File;
 
 import java.lang.Number;
@@ -30,8 +28,7 @@ import io.liteglue.SQLiteStatement;
 /**
  * Android SQLite-Connector Database helper class
  */
-class SQLiteConnectorDatabase extends SQLiteAndroidDatabase
-{
+class SQLiteConnectorDatabase extends SQLiteAndroidDatabase {
     static SQLiteConnector connector = new SQLiteConnector();
 
     SQLiteConnection mydb;
@@ -44,11 +41,11 @@ class SQLiteConnectorDatabase extends SQLiteAndroidDatabase
     /**
      * Open a database.
      *
-     * @param dbFile   The database File specification
+     * @param dbFile The database File specification
      */
     void open(File dbFile) throws Exception {
         mydb = connector.newSQLiteConnection(dbFile.getAbsolutePath(),
-          SQLiteOpenFlags.READWRITE | SQLiteOpenFlags.CREATE);
+                SQLiteOpenFlags.READWRITE | SQLiteOpenFlags.CREATE);
     }
 
     /**
@@ -57,17 +54,17 @@ class SQLiteConnectorDatabase extends SQLiteAndroidDatabase
     @Override
     void closeDatabaseNow() {
         try {
-          if (mydb != null)
-            mydb.dispose();
+            if (mydb != null)
+                mydb.dispose();
         } catch (Exception e) {
-            Log.e(SQLitePlugin.class.getSimpleName(), "couldn't close database, ignoring", e);
         }
     }
 
     /**
      * Ignore Android bug workaround for NDK version
      */
-    void bugWorkaround() { }
+    void bugWorkaround() {
+    }
 
     /**
      * Executes a batch request and sends the results via cbc.
@@ -78,7 +75,7 @@ class SQLiteConnectorDatabase extends SQLiteAndroidDatabase
      * @param cbc        Callback context from Cordova API
      */
     @Override
-    void executeSqlBatch( String[] queryarr, JSONArray[] jsonparams, CallbackContext cbc) {
+    void executeSqlBatch(String[] queryarr, JSONArray[] jsonparams, CallbackContext cbc) {
 
         if (mydb == null) {
             // not allowed - can only happen if someone has closed (and possibly deleted) a database and then re-used the database
@@ -118,27 +115,25 @@ class SQLiteConnectorDatabase extends SQLiteAndroidDatabase
                 ex.printStackTrace();
                 sqliteErrorCode = ex.getErrorCode();
                 errorMessage = ex.getMessage();
-                Log.e("executeSqlBatch", "SQLitePlugin.executeSql[Batch](): SQL Error code = " + sqliteErrorCode + " message = " + errorMessage);
 
-                switch(sqliteErrorCode) {
-                case SQLCode.ERROR:
-                    code = 5; // SQLException.SYNTAX_ERR
-                    break;
-                case 13: // SQLITE_FULL
-                    code = 4; // SQLException.QUOTA_ERR
-                    break;
-                case SQLCode.CONSTRAINT:
-                    code = 6; // SQLException.CONSTRAINT_ERR
-                    break;
-                default:
-                    /* do nothing */
+                switch (sqliteErrorCode) {
+                    case SQLCode.ERROR:
+                        code = 5; // SQLException.SYNTAX_ERR
+                        break;
+                    case 13: // SQLITE_FULL
+                        code = 4; // SQLException.QUOTA_ERR
+                        break;
+                    case SQLCode.CONSTRAINT:
+                        code = 6; // SQLException.CONSTRAINT_ERR
+                        break;
+                    default:
+                        /* do nothing */
                 }
             } catch (JSONException ex) {
                 // NOT expected:
                 ex.printStackTrace();
                 errorMessage = ex.getMessage();
                 code = 0; // SQLException.UNKNOWN_ERR
-                Log.e("executeSqlBatch", "SQLitePlugin.executeSql[Batch](): UNEXPECTED JSON Error=" + errorMessage);
             }
 
             try {
@@ -162,7 +157,6 @@ class SQLiteConnectorDatabase extends SQLiteAndroidDatabase
                 }
             } catch (JSONException ex) {
                 ex.printStackTrace();
-                Log.e("executeSqlBatch", "SQLitePlugin.executeSql[Batch](): Error=" + ex.getMessage());
                 // TODO what to do?
             }
         }
@@ -207,7 +201,6 @@ class SQLiteConnectorDatabase extends SQLiteAndroidDatabase
         } catch (SQLException ex) {
             ex.printStackTrace();
             String errorMessage = ex.getMessage();
-            Log.e("executeSqlBatch", "SQLitePlugin.executeSql[Batch](): Error=" + errorMessage);
 
             // cleanup statement and throw the exception:
             myStatement.dispose();
@@ -215,7 +208,6 @@ class SQLiteConnectorDatabase extends SQLiteAndroidDatabase
         } catch (JSONException ex) {
             ex.printStackTrace();
             String errorMessage = ex.getMessage();
-            Log.e("executeSqlBatch", "SQLitePlugin.executeSql[Batch](): Error=" + errorMessage);
 
             // cleanup statement and throw the exception:
             myStatement.dispose();
@@ -236,22 +228,22 @@ class SQLiteConnectorDatabase extends SQLiteAndroidDatabase
                         key = myStatement.getColumnName(i);
 
                         switch (myStatement.getColumnType(i)) {
-                        case SQLColumnType.NULL:
-                            row.put(key, JSONObject.NULL);
-                            break;
+                            case SQLColumnType.NULL:
+                                row.put(key, JSONObject.NULL);
+                                break;
 
-                        case SQLColumnType.REAL:
-                            row.put(key, myStatement.getColumnDouble(i));
-                            break;
+                            case SQLColumnType.REAL:
+                                row.put(key, myStatement.getColumnDouble(i));
+                                break;
 
-                        case SQLColumnType.INTEGER:
-                            row.put(key, myStatement.getColumnLong(i));
-                            break;
+                            case SQLColumnType.INTEGER:
+                                row.put(key, myStatement.getColumnLong(i));
+                                break;
 
-                        case SQLColumnType.BLOB:
-                        case SQLColumnType.TEXT:
-                        default: // (just in case)
-                            row.put(key, myStatement.getColumnTextNativeString(i));
+                            case SQLColumnType.BLOB:
+                            case SQLColumnType.TEXT:
+                            default: // (just in case)
+                                row.put(key, myStatement.getColumnTextNativeString(i));
                         }
 
                     }
